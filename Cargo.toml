@@ -12,6 +12,7 @@ dotenv = "0.15.0"
 futures = "0.3"
 chrono = { version = "0.4.23", features = ["serde"] }
 log = "0"
+postgres = "0.19.4" # To be used in the future, DO NOT REMOVE
 
 [dependencies.mongodb]
 version = "2.2.0"
