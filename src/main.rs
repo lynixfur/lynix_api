@@ -1,36 +1,20 @@
-use serde::Serialize;
 use actix_web::{get, web, web::Data, App, HttpServer, Responder};
 use log::{info, warn};
 use dotenv::dotenv;
 use crate::config::db;
 use mongodb::Client;
 use std::env;
+use serde::Serialize;
 
+mod api;
 mod models;
 mod config;
-
-#[derive(Serialize)]
-struct ApiObject {
-    api_version: String,
-    api_build_number: String,
-    api_status: String
-}
+mod repository;
 
 #[derive(Serialize)]
 struct ErrorStatus {
     status: String,
     msg: String
-}
-
-#[get("/")]
-async fn index() -> impl Responder {
-    let obj = ApiObject {
-        api_version: "v2.0.20230308_RUST".to_string(),
-        api_build_number: "".to_string(),
-        api_status: "Operational".to_string()
-    };
-
-    return web::Json(obj);
 }
 
 #[get("/events")]
@@ -68,8 +52,8 @@ async fn main() -> std::io::Result<()> {
     println!("✨ LynixAPI Started {}:{}", server_host, server_port);
     HttpServer::new(move || {
         App::new()
-            .service(index)
-            .service(events) // Events Service System
+            .configure(api::index_api::init)
+            .configure(api::event_api::init) // Events Service System
             .app_data(Data::new(client.clone()))
     })
         .bind(("127.0.0.1", 8557))?
