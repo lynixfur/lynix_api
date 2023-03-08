@@ -1,4 +1,3 @@
-use bson::serde_helpers::chrono_datetime_as_bson_datetime;
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 
@@ -17,9 +16,7 @@ pub struct Event {
     pub event_image_alt: String,
     pub event_active: bool,
     pub event_live: bool,
-    #[serde(with = "chrono_datetime_as_bson_datetime")]
     pub created_ts: DateTime<Utc>,
-    #[serde(with = "chrono_datetime_as_bson_datetime")]
     pub updated_ts: DateTime<Utc>,
 }
 
