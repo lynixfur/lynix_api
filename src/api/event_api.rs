@@ -1,37 +1,39 @@
-use actix_web::{get, web::{Data, Json, Path, ServiceConfig}, Responder};
-use crate::models::{apimeta_model::ApiMeta, event_model::Event};
+use actix_web::{get, web::{Data, Json, Path, ServiceConfig}, Responder, HttpResponse};
 use chrono::{Utc};
-use mongodb::Client;
+use mongodb::options::FindOptions;
+use mongodb::{bson::doc, Client, Collection};
+use bson::{from_bson, to_bson, Bson};
+use futures::TryStreamExt;
+
+use crate::{
+    models::{event_model::Event},
+};
+use crate::models::error_model::ApiErrorType;
 
 pub fn init(cfg: &mut ServiceConfig) {
     cfg.service(get_all_events);
 }
 
 #[get("/events")]
-pub async fn get_all_events(client: Data<Client>) -> impl Responder {
-    let mut event_names = vec!["The Big Adventure","Furnal Equniox 2023", "HackTheBox CTF", "Furality Sylva"];
+pub async fn get_all_events(client: Data<Client>) -> Result<impl Responder, ApiErrorType> {
+    let collection: Collection<Event> = client.database("lynix").collection("events");
+    let filter = doc! { "event_name": "Furnal Equinox 2023" };
+    let find_options = FindOptions::default();
+    let mut cursors = collection.find(None, find_options).await?;
+
     let mut events: Vec<Event> = Vec::new();
 
-    for event in event_names.iter() {
-        let e = Event {
-            id: "".to_string(),
-            event_name: event.to_string(),
-            event_description: "".to_string(),
-            event_location: "Toronto - ON, Canada".to_string(),
-            event_start: Utc::now(),
-            event_end: Utc::now(),
-            event_type: "".to_string(),
-            event_url: "".to_string(),
-            event_image: "".to_string(),
-            event_image_alt: "".to_string(),
-            event_active: true,
-            event_live: true,
-            created_ts: Utc::now(),
-            updated_ts: Utc::now(),
-        };
-        events.push(e)
+    let count = collection.count_documents(None, None).await?;
+    println!("🔨 [DEBUG] Events Found ({})", count);
+
+
+
+    while let Some(event) = cursors.try_next().await? {
+        println!("🔨 [DEBUG] Loading Cursor for Event ({})", event.event_name);
+        events.push(event);
     }
 
-    // Return the vector as JSON
-    return Json(events);
+
+    println!("✅ Loaded Events Successfully!");
+    Ok(Json(events))
 }

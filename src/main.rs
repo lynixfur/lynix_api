@@ -9,7 +9,6 @@ use serde::Serialize;
 mod api;
 mod models;
 mod config;
-mod repository;
 
 #[derive(Serialize)]
 struct ErrorStatus {

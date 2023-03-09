@@ -7,10 +7,11 @@ pub fn init(cfg: &mut web::ServiceConfig) {
 
 #[get("/")]
 pub async fn index() -> impl Responder {
+
+    const VERSION: &str = env!("CARGO_PKG_VERSION");
+
     let obj = ApiMeta {
-        api_version: "v2.0.20230308_RUST".to_string(),
-        api_build_number: "".to_string(),
-        api_status: "Operational".to_string()
+        api_version: VERSION.to_string(),
     };
 
     return web::Json(obj);

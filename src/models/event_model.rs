@@ -1,10 +1,11 @@
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
+use bson::oid::ObjectId;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Event {
     #[serde(rename = "_id")]
-    pub id: String,
+    pub id: ObjectId,
     pub event_name: String,
     pub event_description: String,
     pub event_location: String,
