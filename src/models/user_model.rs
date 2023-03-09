@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 use bson::oid::ObjectId;
+use crate::models::fursuit_model::Fursuit;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct User {
@@ -10,5 +11,5 @@ pub struct User {
     pub password: String,
     pub role: String,
     pub active: bool,
-    pub suspended: bool,
+    pub suspended: bool
 }

@@ -10,11 +10,11 @@ pub struct Event {
     pub event_description: String,
     pub event_location: String,
     pub event_start: DateTime<Utc>,
-    pub event_end: DateTime<Utc>,
+    pub event_end: Option<DateTime<Utc>>,
     pub event_type: String,
     pub event_url: String,
     pub event_image: String,
-    pub event_image_alt: String,
+    pub event_image_alt: Option<String>,
     pub event_status: String, // This must be checked to make sure the statuses are the valid value keys: active, ended, live, upcoming, confirmed, canceled etc...
     pub event_active: bool,
     pub event_live: bool,

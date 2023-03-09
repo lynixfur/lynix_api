@@ -52,10 +52,12 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(move || {
         App::new()
             .configure(api::index_api::init)
-            .configure(api::event_api::init) // Events Service System
+            .configure(api::event_api::init)
+            .configure(api::fursuit_api::init)// Events Service System
             .app_data(Data::new(client.clone()))
+            .default_service(web::to(|| api::index_api::notfound()))
     })
-        .bind(("127.0.0.1", 8557))?
+        .bind((server_host, server_port))?
         .run()
         .await
 }

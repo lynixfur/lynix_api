@@ -14,10 +14,10 @@ dotenv = "0.15.0"
 chrono = { version = "0.4.23", features = ["serde"] }
 log = "0"
 bson = "1.2"
-postgres = "0.19.4" # To be used in the future, DO NOT REMOVE
+cdrs-tokio = "7.0.4" # Casandra Soon
 futures = "0.3.26"
 
-[dependencies.mongodb]
+[dependencies.mongodb] # MongoDB Driver (Will stop using soon?)
 version = "2.2.0"
 default-features = false
 features = ["async-std-runtime"]
