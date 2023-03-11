@@ -1,15 +1,18 @@
 # Lynix API
 Lynix API is an API used by the lynix.ca website and services created in rust.
 
-# Authentication Features
-| Feature | Status | Note | 
-| ------- | ------ | ---- | 
-| Basic Authentication | ✅ | |
-| Password Hasing | ✅ | |
-| Session / Bearer Tokens / JWT | ❌ | To be implemented |
-| TOTP | ❌ | To be implemented |
-| Webauthn | ❌ | |
-| Account Management | ❌ | To be implemented |
+# Migration Progress
+| Feature / Service | Status | Latest Version Available | Note | 
+| ------- | ------ | ---- | ---- |
+| Event Management System | ⚠️ | v2.0.X | Missing CRUD |
+| Authentication | ⚠️ | v2.0.X | Missing Critical Parts |
+| Blog System | ❌ | v1.8.X (TS) | Not Implemented in Rust |
+| CMS Page System | ❌ | v1.8.X (TS) | Not Implemented in Rust |
+| FurSystem | ❌ | v1.8.X (TS) | Not Implemented in Rust |
+| WolfHR | ❌ | v1.3.X (TS) | Not Implemented in Rust |
+| Discord Webhooks | ❌ | v1.3.X (TS) | Not Implemented in Rust |
+| Websockets | ❌ | v1.0.X (TS) | Not Implemented in Rust |
+
 
 # Features
 - Event Management System
@@ -20,4 +23,14 @@ Lynix API is an API used by the lynix.ca website and services created in rust.
 - WolfHR Built-In for Supported Watches
   - This requires NeosVR or VRChat and a compatible WearOS Watch
 - Discord Webhook Support
+
+# Authentication Features
+| Feature | Status | Note | 
+| ------- | ------ | ---- | 
+| Basic Authentication | ✅ | |
+| Password Hasing | ✅ | |
+| Session / Bearer Tokens / JWT | ❌ | To be implemented |
+| TOTP | ❌ | To be implemented |
+| Webauthn | ❌ | |
+| Account Management | ❌ | To be implemented |
  
