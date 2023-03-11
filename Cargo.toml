@@ -7,17 +7,21 @@ edition = "2021"
 
 [dependencies]
 actix-web = "4"
+actix-web-httpauth = "0.8.0"
+actix-session = "0.7.2"
+argon2 = "0.5.0"
+hmac = "0.12.1"
+sha2 = "0.10.6"
+jwt = "0.16.0"
 derive_more = "0.99.17"
 validator = "0.16.0"
 serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0.91"
 dotenv = "0.15.0"
 chrono = { version = "0.4.23", features = ["serde"] }
-log = "0"
+log = "0.4.17"
+pretty_env_logger = "0.4.0"
 bson = "1.2"
-cdrs-tokio = "7.0.4" # Casandra Soon
 futures = "0.3.26"
-
-[dependencies.mongodb] # MongoDB Driver (Will stop using soon?)
-version = "2.2.0"
-default-features = false
-features = ["async-std-runtime"]
+sqlx = { version = "0.6.2", features = ["runtime-async-std-native-tls", "postgres", "uuid", "chrono"] }
+uuid = { version = "1.2.2", features = ["serde", "v4"] }

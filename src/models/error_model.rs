@@ -3,12 +3,18 @@ use chrono::{SecondsFormat, Utc};
 use derive_more::{Display, Error};
 use serde::Serialize;
 use validator::ValidationErrors;
+use argon2::password_hash::Error;
+use std::fmt::{Debug, Display, Formatter};
+use actix_web::error::ParseError::Status;
 
 // -- Error handing.
 #[derive(Debug, Display, Error)]
 pub enum ApiErrorType {
     #[display(fmt = "Internal server error. Try again after some time.")]
     InternalServerError,
+
+    #[display(fmt = "Invalid Authentication.")]
+    InvalidAuthAttempt,
 
     #[display(fmt = "There was an error with the Database!")]
     MongoError,
@@ -53,12 +59,28 @@ pub struct ApiError {
     pub sub_errors: Vec<ValidationError>,
 }
 
+impl From<argon2::password_hash::Error> for ApiErrorType {
+    fn from(value: argon2::password_hash::Error) -> Self {
+        todo!()
+    }
+}
+
+impl From<sqlx::Error> for ApiErrorType {
+    fn from(value: sqlx::Error) -> Self {
+        println!("🔥 There was an error with SQLX : {}", value);
+        return ApiErrorType::InternalServerError
+    }
+}
+
 // Set Debug Error messages for Global error.
 impl ApiErrorType {
     fn debug_message(&self) -> String {
         match self {
             ApiErrorType::InternalServerError => {
                 "Internal server error. Please try again later.".to_owned()
+            }
+            ApiErrorType::InvalidAuthAttempt => {
+                "The credentials you provided did not match our records.".to_owned()
             }
             ApiErrorType::MongoError => {
                 "Please try again later.".to_owned()
@@ -81,14 +103,6 @@ impl ApiErrorType {
     }
 }
 
-// MongoDB Error Handling
-impl std::convert::From<mongodb::error::Error> for ApiErrorType {
-    fn from(err: mongodb::error::Error) -> Self {
-        println!("❌ [ERROR] {}", err);
-        ApiErrorType::MongoError
-    }
-}
-
 // Global error handling with actix-web ResponseError.
 impl ResponseError for ApiErrorType {
     // Global error handler status code.
@@ -99,6 +113,7 @@ impl ResponseError for ApiErrorType {
             ApiErrorType::BadRequest => StatusCode::BAD_REQUEST,
             ApiErrorType::UserNotFound => StatusCode::NOT_FOUND,
             ApiErrorType::AuthenticationError => StatusCode::UNAUTHORIZED,
+            ApiErrorType::InvalidAuthAttempt => StatusCode::UNAUTHORIZED,
             ApiErrorType::AuthorizationError => StatusCode::FORBIDDEN,
             ApiErrorType::ValidationError { .. } => StatusCode::UNPROCESSABLE_ENTITY,
             ApiErrorType::InvalidCredential => StatusCode::UNAUTHORIZED,

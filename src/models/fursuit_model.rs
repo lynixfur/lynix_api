@@ -7,6 +7,12 @@ pub enum CoolingStatus {
     Overheat(String)
 }
 
+pub enum TailAnimation {
+    SlowWag,
+    NormalWag,
+    FastWag
+}
+
 pub struct Fursuit {
     pub intern_temp: i64,
     pub extern_temp: i64,
@@ -15,5 +21,9 @@ pub struct Fursuit {
     pub cooling_enabled: bool,
     pub luma_enabled: bool,
     pub gradiant_system_enabled: bool,
-    pub sound_system_enabled: bool
+    pub sound_system_enabled: bool,
+    pub tail_control: bool,
+    pub public_tail_control: bool,
+    pub tail_animation: TailAnimation,
+    pub tail_coordinate: Vec<i64> // [X,Y,Z]
 }
