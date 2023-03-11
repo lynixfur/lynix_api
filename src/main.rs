@@ -76,6 +76,7 @@ async fn main() -> std::io::Result<()> {
             .configure(api::event_api::init)
             .configure(api::fursuit_api::init)
             .configure(api::auth_api::init)
+            .configure(api::wolfhr_api::init)
             .app_data(web::Data::new(AppState { db: pool.clone() }))
             .default_service(web::to(|| api::index_api::notfound()))
     })

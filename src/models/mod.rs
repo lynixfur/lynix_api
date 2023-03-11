@@ -3,4 +3,4 @@ pub mod event_model;
 pub mod user_model;
 pub mod error_model;
 pub mod fursuit_model;
-mod mod wolfhr_model;
+pub mod wolfhr_model;
