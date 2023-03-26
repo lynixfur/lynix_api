@@ -9,4 +9,5 @@ type WolfHR struct {
 	VRChatUsername string  `json:"vrchat_username"`
 	HeartRate      int     `json:"heartrate"`
 	BatteryHealth  float64 `json:"battery_health"`
+	LastUpdated    string  `json:"last_updated"`
 }
