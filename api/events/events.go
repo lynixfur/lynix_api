@@ -7,20 +7,31 @@ import (
 func GetEvents(ctx *gin.Context) {
 	// Get events from the database.
 
-	// TODO: Add database query to get events.
-	ctx.JSON(404, gin.H{
-		"message": "No events found.",
+	ctx.JSON(200, gin.H{
+		"message": "This endpoint is currently under development.",
 	})
 }
 
-func updateEvent() {
+func UpdateEvent(ctx *gin.Context) {
 	// Update event in the database.
+
+	ctx.JSON(200, gin.H{
+		"message": "This endpoint is currently under development.",
+	})
 }
 
-func deleteEvent() {
+func DeleteEvent(ctx *gin.Context) {
 	// Delete event from the database that is no longer needed.
+
+	ctx.JSON(200, gin.H{
+		"message": "This endpoint is currently under development.",
+	})
 }
 
-func addEvent() {
+func AddEvent(ctx *gin.Context) {
 	// Add new event to the database that was previously not there.
+
+	ctx.JSON(200, gin.H{
+		"message": "This endpoint is currently under development.",
+	})
 }

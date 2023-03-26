@@ -44,6 +44,9 @@ func main() {
 	// Routes
 	r.GET("/fursuit/get_data", fursuit.GetData)
 	r.GET("/events", events.GetEvents)
+	r.POST("/events/add", events.AddEvent)
+	r.POST("/events/update", events.UpdateEvent)
+	r.POST("/events/delete", events.DeleteEvent)
 
 	// Default 404 Route
 	r.NoRoute(func(c *gin.Context) {
