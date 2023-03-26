@@ -3,12 +3,36 @@ package main
 import (
 	"lynixapi/api/events"
 	"lynixapi/api/fursuit"
+	"lynixapi/database"
+	"lynixapi/database/models"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
+
+	"log"
 )
+
+func initDatabase() {
+	database.Connect()
+	database.Database.AutoMigrate(&models.Event{})
+	database.Database.AutoMigrate(&models.WolfHR{})
+}
+
+func loadEnv() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+}
 
 func main() {
 	r := gin.Default()
+
+	// Load environment variables
+	loadEnv()
+
+	// Connect to the database
+	initDatabase()
 
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
