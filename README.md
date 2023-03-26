@@ -1,15 +1,15 @@
 # Lynix API
-Lynix API is an API used by the lynix.ca website and services created in rust.
+Lynix API is an API used by the lynix.ca website and services created in Go.
 
 # Migration Progress
 | Feature / Service | Status | Latest Version Available | Note                                       | 
 | ------- | ---- |--------------------------|--------------------------------------------|
-| Event Management System | ⚠️ | v2.0.X                   | Missing CRUD                               |
-| Authentication | ⚠️ | v2.0.X                   | Missing Critical Parts                     |
+| Event Management System | ❌ | v2.0.X                   | Missing CRUD                               |
+| Authentication | ❌ | v2.0.X                   | Missing Critical Parts                     |
 | Blog System | ❌ | v1.8.X (TS)              | Not Implemented in Rust                    |
 | CMS Page System | ❌ | v1.8.X (TS)              | Not Implemented in Rust                    |
 | FurSystem | ❌ | v1.8.X (TS)              | Not Implemented in Rust                    |
-| WolfHR | ✅ | v2.1.X                   | Can't compile in this commit due to errors |
+| WolfHR | ❌ | v2.1.X                   | Can't compile in this commit due to errors |
 | Discord Webhooks | ❌ | v1.3.X (TS)              | Not Implemented in Rust                    |
 | Websockets | ❌ | v1.0.X (TS)              | Not Implemented in Rust                    |
 
@@ -27,10 +27,10 @@ Lynix API is an API used by the lynix.ca website and services created in rust.
 # Authentication Features
 | Feature | Status | Note | 
 | ------- | ------ | ---- | 
-| Basic Authentication | ✅ | |
-| Password Hasing | ✅ | |
+| Basic Authentication | ❌ | To be implemented |
+| Password Hasing | ❌ | To be implemented |
 | Session / Bearer Tokens / JWT | ❌ | To be implemented |
 | TOTP | ❌ | To be implemented |
-| Webauthn | ❌ | |
+| Webauthn | ❌ | To be implemented |
 | Account Management | ❌ | To be implemented |
  
