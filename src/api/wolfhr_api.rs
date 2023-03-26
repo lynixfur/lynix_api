@@ -43,44 +43,14 @@ pub async fn get_wolfhr(path: actix_web::web::Path<String>, info: web::Query<Wol
 
 #[post("/wolfhr/send_data")]
 pub async fn post_wolfhr(data: web::Data<AppState>) -> Result<impl Responder, ApiErrorType> {
-    // Check if the current user exists
-    let user_data_result = sqlx::query_as::<_, WolfHR>(
-        "SELECT * FROM wolf_hr WHERE str_id = $1",
-    ).bind("test").fetch_optional(&data.db).await?;
-
-    let user_data = match user_data_result {
-        Some(_) => {
-            // Update Row
-            sqlx::query!(
-                "UPDATE wolf_hr SET wolf_hr = $1, wolf_battery_percent = $2, last_updated = $3 WHERE str_id = $4",
-                100,
-                100,
-                None,
-                "test"
-            ).execute(&data.db).await?;
-
-            Ok(HttpResponse::Ok().body("Updated"))
-        },
-        None => {
-            let new_user = WolfHR {
-                id: uuid::Uuid::new_v4(),
-                str_id: "test".to_string(),
-                wolf_hr: 0,
-                wolf_battery_percent: 0,
-                last_updated: Some(Utc::now()),
-            };
-
-            sqlx::query!(
-                "INSERT INTO wolf_hr (id, str_id, wolf_hr, wolf_battery_percent, last_updated) VALUES ($1, $2, $3, $4, $5)",
-                new_user.id,
-                new_user.str_id,
-                new_user.wolf_hr,
-                new_user.wolf_battery_percent,
-                new_user.last_updated
-            ).execute(&data.db).await?;
-
-            Ok(HttpResponse::Ok().json(json!(new_user)))
-        },
-    };
+    // Removed as this caused issues in the API
+    let mut validation_sub_errs = vec![]; // Empty SubError
+    Ok(HttpResponse::build(StatusCode::FORBIDDEN).json(ApiError {
+        status: 403,
+        time: Utc::now().to_rfc3339_opts(SecondsFormat::Micros, true),
+        message: "You don't have access to this endpoint.".to_string(),
+        debug_message: Some("Ask Lynix on NeosVR for more information why this is occuring, mostlikely there was problems with the new version of the HR System.".to_string()),
+        sub_errors: validation_sub_errs,
+    }))
 }
 
