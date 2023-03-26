@@ -1,7 +1,16 @@
 package events
 
-func getEvents() {
+import (
+	"github.com/gin-gonic/gin"
+)
+
+func GetEvents(ctx *gin.Context) {
 	// Get events from the database.
+
+	// TODO: Add database query to get events.
+	ctx.JSON(404, gin.H{
+		"message": "No events found.",
+	})
 }
 
 func updateEvent() {

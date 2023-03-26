@@ -6,7 +6,7 @@ import (
 
 // This module is used for the Fursuit System that controls RGB lighting, tail animations and cooling on a fursuit.
 
-func getData(ctx *gin.Context) {
+func GetData(ctx *gin.Context) {
 	ctx.JSON(403, gin.H{
 		"message": "You don't have access to this endpoint.",
 		"notice":  "This resource is only available lynix at the current moment, this feature may come to other fursuiters in the future! Stay tuned for announcements for when the FurSystem releases!",

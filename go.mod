@@ -1,4 +1,4 @@
-module lynixapi/main
+module lynixapi
 
 go 1.20
 
