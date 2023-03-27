@@ -2,14 +2,17 @@ package events
 
 import (
 	"github.com/gin-gonic/gin"
+
+	"lynixapi/database"
+	"lynixapi/database/models"
 )
 
 func GetEvents(ctx *gin.Context) {
 	// Get events from the database.
+	var events []models.Event
+	database.Database.Find(&events)
 
-	ctx.JSON(200, gin.H{
-		"message": "This endpoint is currently under development.",
-	})
+	ctx.JSON(200, events)
 }
 
 func UpdateEvent(ctx *gin.Context) {
