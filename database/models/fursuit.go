@@ -12,21 +12,13 @@ type Fursuit struct {
 	VRChatUsername string    `json:"vrchat_username"`
 
 	// Fursuit Information
-	FursuitSWVersion string `json:"fursuit_sw_version"`
-	FursuitLIP       string `json:"fursuit_lip"`
+	// This feature was dropped as the FurSyncBoard are not connected to the internet for pollution reasons.
+	// This would cause too much interfernce at Conventions and Hotels.
 
 	// Fursuit RGB Control
-	PrevFrameRed   int `json:"prev_frame_red"`
-	PrevFrameGreen int `json:"prev_frame_green"`
-	PrevFrameBlue  int `json:"prev_frame_blue"`
-
-	CurrentFrameRed   int `json:"current_frame_red"`
-	CurrentFrameGreen int `json:"current_frame_green"`
-	CurrentFrameBlue  int `json:"current_frame_blue"`
-
-	NextFrameRed   int `json:"next_frame_red"`
-	NextFrameGreen int `json:"next_frame_green"`
-	NextFrameBlue  int `json:"next_frame_blue"`
+	// Deprecated Feature: RGB Control will use a Mic Array to sync up with music and seperate into 5 channels
+	// The idea was dropped due to Access Points in hotels not handling the stress-test correctly.
+	// Other devices (FurSyncBoards) will be able to communicate with other fursuiters to sync up with music.
 
 	// Fursuit Tail Control Cordinate Vector X, Y, Z with no Frame
 	TailCordX int `json:"tail_cord_x"`
