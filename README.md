@@ -6,12 +6,12 @@ Lynix API is an API used by the lynix.ca website and services created in Go.
 | ------- | ---- |--------------------------|--------------------------------------------|
 | Event Management System | ❌ | v2.0.X                   | Missing CRUD                               |
 | Authentication | ❌ | v2.0.X                   | Missing Critical Parts                     |
-| Blog System | ❌ | v1.8.X (TS)              | Not Implemented in Rust                    |
-| CMS Page System | ❌ | v1.8.X (TS)              | Not Implemented in Rust                    |
-| FurSystem | ❌ | v1.8.X (TS)              | Not Implemented in Rust                    |
-| WolfHR | ❌ | v2.1.X                   | Can't compile in this commit due to errors |
-| Discord Webhooks | ❌ | v1.3.X (TS)              | Not Implemented in Rust                    |
-| Websockets | ❌ | v1.0.X (TS)              | Not Implemented in Rust                    |
+| Blog System | ❌ | v1.8.X (TS)              | Not Implemented in Go                    |
+| CMS Page System | ❌ | v1.8.X (TS)              | Not Implemented in Go                    |
+| FurSystem | ✅ | v3.0.2_Alpha (Matcha)              |                     |
+| WolfHR | ❌ | v2.1.X                   | Not Implemented in Go |
+| Discord Webhooks | ❌ | v1.3.X (TS)              | Not Implemented in Go                    |
+| Websockets | ❌ | v1.0.X (TS)              | Not Implemented in Go                    |
 
 
 # Features
