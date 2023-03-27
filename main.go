@@ -16,6 +16,7 @@ func initDatabase() {
 	database.Connect()
 	database.Database.AutoMigrate(&models.Event{})
 	database.Database.AutoMigrate(&models.WolfHR{})
+	database.Database.AutoMigrate(&models.Fursuit{})
 }
 
 func loadEnv() {
