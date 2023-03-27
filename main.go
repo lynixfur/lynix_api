@@ -44,6 +44,7 @@ func main() {
 
 	// Routes
 	r.GET("/fursuit/get_data", fursuit.GetData)
+	r.GET("/fursuit/get_data/:neos_username", fursuit.GetUserData)
 	r.GET("/events", events.GetEvents)
 	r.GET("/events/:id", events.FindEvent)
 	r.POST("/events/add", events.AddEvent)
