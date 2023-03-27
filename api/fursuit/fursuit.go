@@ -22,7 +22,7 @@ func GetUserData(ctx *gin.Context) {
 	var fursuit_data models.Fursuit
 
 	if err := database.Database.Where("neos_username = ?", ctx.Param("neos_username")).First(&fursuit_data).Error; err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Fursuit data is not available, either the username or data is not initiated."})
 		return
 	}
 
