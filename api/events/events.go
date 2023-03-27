@@ -1,6 +1,8 @@
 package events
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 
 	"lynixapi/database"
@@ -13,6 +15,18 @@ func GetEvents(ctx *gin.Context) {
 	database.Database.Find(&events)
 
 	ctx.JSON(200, events)
+}
+
+func FindEvent(ctx *gin.Context) {
+	// Get Single Row from Database.
+	var event models.Event
+
+	if err := database.Database.Where("id = ?", ctx.Param("id")).First(&event).Error; err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, event)
 }
 
 func UpdateEvent(ctx *gin.Context) {
