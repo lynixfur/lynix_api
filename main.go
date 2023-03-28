@@ -1,6 +1,7 @@
 package main
 
 import (
+	"lynixapi/api"
 	"lynixapi/api/events"
 	"lynixapi/api/fursuit"
 	"lynixapi/database"
@@ -17,6 +18,7 @@ func initDatabase() {
 	database.Database.AutoMigrate(&models.Event{})
 	database.Database.AutoMigrate(&models.WolfHR{})
 	database.Database.AutoMigrate(&models.Fursuit{})
+	database.Database.AutoMigrate(&models.Certification{})
 }
 
 func loadEnv() {
@@ -50,7 +52,8 @@ func main() {
 	r.POST("/events/add", events.AddEvent)
 	r.POST("/events/update", events.UpdateEvent)
 	r.POST("/events/delete", events.DeleteEvent)
-
+	r.GET("/certs", api.GetCertifications)
+	r.GET("/cert/:id", api.FindCertification)
 	// Default 404 Route
 	r.NoRoute(func(c *gin.Context) {
 		c.JSON(404, gin.H{
